@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xoso</title>
+    <style>
+        *
+        {
+            padding:0;
+            margin:0;
+            box-sizing: border-box;
+            font-size: 30px;
+            font-family: Arial;
+            color:#122b26;
+        }
+        .container
+        {
+            width: 300px;
+            height: 300px;
+            margin: 70px auto;
+            position: relative;
+        }
+        svg
+        {
+            display: block;
+            width: 100%;
+            height: 100%;
+            transition:7s;
+        }
+        circle:first-child
+        {
+            fill:#25a17c;
+        }
+        circle:nth-child(2)
+        {
+            fill:red;
+        }
+        line
+        {
+            stroke:red;
+            stroke-width: 15px;
+            stroke-linecap: round;
+        }
+        .container>div
+        {
+            width:100%;
+            height:100%;
+            position: absolute;
+            top:0;
+            left: 0;
+        }
+        .container>div>div
+        {
+            position: absolute;
+            top:-45px;
+            left: 47.5%;
+        }
+        #bx0
+        {
+            transform:rotate(0);
+        }
+        #bx1
+        {
+            transform:rotate(36deg);
+        }
+        #bx2
+        {
+            transform:rotate(72deg);
+        }
+        #bx3
+        {
+            transform:rotate(108deg);
+        }
+        #bx4
+        {
+            transform:rotate(144deg);
+        }
+        #bx5
+        {
+            transform:rotate(180deg);
+        }
+        #bx6
+        {
+            transform:rotate(216deg);
+        }
+        #bx7
+        {
+            transform:rotate(252deg);
+        }
+        #bx8
+        {
+            transform:rotate(288deg);
+        }
+        #bx9
+        {
+            transform:rotate(324deg);
+        }
+        #image
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #image img
+        {
+            display: none;
+            border: 15px solid green;
+            width:280px;
+        }
+        #image img:last-child
+        {
+            border: 15px solid red;
+        }
+        input
+        {
+            outline:none;
+            width:170px;
+            height:80px;
+            margin: auto;
+            text-align: center;
+        }
+        p
+        {
+            text-align: center;
+            margin:5px auto;
+        }
+        button
+        {
+            padding:10px 20px;
+            width:170px;
+            height:80px;
+        }
+        audio
+        {
+            display: none;
+        }
+        h1
+        {
+            text-align: center;
+            font-size: 50px;
+            margin-top:10px;
+        }
+        #result
+        {
+            font-size: 20px;
+            color:rgba(255,0,0,0.4);
+        }
+    </style>
+</head>
+<body>
+    <h1>LÔ ĐỀ</h1>
+    <div class="container">
+        <svg id = "disc">
+            <circle cx="50%" cy="50%" r="50%" />
+            <circle cx="50%" cy="50%" r="2%" />
+            <line id="lin" x1="50%" y1="50%" x2="150px" y2="10px"/>
+        </svg>
+        <div id ="bx0">
+            <div>0</div>
+        </div>
+        <div id ="bx1">
+            <div>1</div>
+        </div>
+        <div id ="bx2">
+            <div>2</div>
+        </div>
+        <div id ="bx3">
+            <div>3</div>
+        </div>
+        <div id ="bx4">
+            <div>4</div>
+        </div>
+        <div id ="bx5">
+            <div>5</div>
+        </div>
+        <div id ="bx6">
+            <div>6</div>
+        </div>
+        <div id ="bx7">
+            <div>7</div>
+        </div>
+        <div id ="bx8">
+            <div>8</div>
+        </div>
+        <div id ="bx9">
+            <div>9</div>
+        </div>
+        <div id = "image">
+            <img  id = "image1" src="asset/congrat.jpg">
+            <img  id = "image2" src="asset/sorry.jpg">
+        </div>
+    </div>
+    <p id = "choose">Chọn con số may mắn:</p>
+    <p><input type="text" id="number"><button id="btn" onclick = rotate()>Quay</button></p>
+    <p id="result">Tỷ lệ ăn của bạn là: 0%</p>
+    <audio id = "music" controls loop>
+        <source src="asset/music.mp3" type="audio/mp3">
+    </audio>
+</body>
+<script>
+    let valueInput = 0, random = 0, interval, flag = false, match = 0, total = 0
+    function rotate()
+    {
+            random = Math.floor(Math.random() * 10)
+            document.getElementById("image1").style.display = "none"
+            document.getElementById("image2").style.display = "none"
+            document.getElementById("lin").style.display = "inline"
+            valueInput = document.getElementById("number").value
+            if((valueInput >= 0) && (valueInput <=9) && (valueInput != "") && (Number(valueInput).toString().length == 1))
+            {
+                document.getElementById("disc").style.transition = "7s"
+                document.getElementById("disc").style.transform = `rotate(${random * 36 + (3600 * 10)}deg)`
+                interval = setInterval(dung,7100)
+                document.getElementById("music").play()
+                flag = true
+                document.getElementById("choose").innerHTML = "Số bạn đã chọn là: " + "<b style='color:red;'>" + valueInput + "</b>"
+                document.getElementById("number").style.display = "none"
+                document.getElementById("btn").style.display = "none"
+                total++
+            }
+            else
+            {
+                alert("Hãy nhập số từ 1 đến 10")
+            }
+            if(valueInput == random)  match++
+    }
+    function dung()
+    {
+        clearInterval(interval)
+        document.getElementById("music").pause()
+        if(valueInput == random) 
+        {
+            document.getElementById("image1").style.display = "block"
+            document.getElementById("image2").style.display = "none"
+        } else
+        {
+            document.getElementById("image1").style.display = "none"
+            document.getElementById("image2").style.display = "block"
+        }
+        document.getElementById("disc").style.transform = `rotate(0deg)`
+        document.getElementById("lin").style.display = "none"
+        document.getElementById("disc").style.transition = "0s"
+        document.getElementById("choose").innerHTML = "Hãy chọn 1 con số may mắn: "
+        document.getElementById("number").style.display = "inline-block"
+        document.getElementById("btn").style.display = "inline-block"
+        document.getElementById("result").innerHTML = "Quay: " + total + "</br>" + "Trúng: " + match + "<br>" + "Tạch: " + (total-match) + "<br>" + "Tỷ lệ: " + Number((match/total) * 100).toFixed(1) + "%"
+    }
+</script>
+</html>
