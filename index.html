@@ -222,7 +222,7 @@
             }
             else
             {
-                alert("Hãy nhập số từ 1 đến 10")
+                alert("Hãy nhập số từ 0 đến 9")
             }
             if(valueInput == random)  match++
     }
@@ -245,7 +245,7 @@
         document.getElementById("choose").innerHTML = "Hãy chọn 1 con số may mắn: "
         document.getElementById("number").style.display = "inline-block"
         document.getElementById("btn").style.display = "inline-block"
-        document.getElementById("result").innerHTML = "Quay:" + total  + "; Trúng:" + match + "; Tạch:" + (total-match) + ";Tỷ lệ:" + Number((match/total) * 100).toFixed(1) + "%"
+        document.getElementById("result").innerHTML = "Quay:" + total  + "; Trúng:" + match + "; Tạch:" + (total-match) + "; Tỷ lệ:" + Number((match/total) * 100).toFixed(1) + "%"
     }
 </script>
 </html>
